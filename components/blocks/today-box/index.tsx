@@ -1,14 +1,28 @@
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import AppPaper from '../../elements/paper';
 import AppCard from '../../elements/card';
-import Typography from '@material-ui/core/Typography';
+import { useStyles } from './styles';
+import { TodayTask } from '../../../models/today';
 
-export default function TodayBox({ ...props }) {
+type Props = {
+  isFetching?: boolean;
+  tasks: TodayTask[];
+}
+
+const TodayBox: React.FC<Props> = props => {
+  const { isFetching, tasks } = props;
+  const classes = useStyles();
   return (
-    <>
+    <Box display='flex' flexDirection='column' className={classes.root}>
       <Typography>Today Tasks</Typography>
-      <AppPaper>
-        <AppCard title='Content' subTitle='Content sub' headerImage='trello-mark-blue.png'></AppCard>
+      <AppPaper className={classes.appPaper}>
+        {tasks.map(task => (
+          <AppCard className={classes.card} title={task.title} subTitle='Content sub' headerImage='me-today_icon.png'></AppCard>
+        ))}
       </AppPaper>
-    </>
+    </Box>
   )
 }
+
+export default TodayBox;

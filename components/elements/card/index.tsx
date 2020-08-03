@@ -8,13 +8,14 @@ export interface CardProp {
   headerImage: string;
   title: string;
   subTitle?: string;
+  className?: string;
 }
 
-export default function AppCard({ ...props }: CardProp ) {
-  const { headerImage, title, subTitle } = props;
+const AppCard: React.FC<CardProp> = props => {
+  const { headerImage, title, subTitle, className } = props;
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
+    <Card className={`${classes.root} ${className}`}>
       <Box display='flex'>
         <Box mr={1}>
           <img src={`/images/${headerImage}`} className={classes.headerImage} />
@@ -32,3 +33,4 @@ export default function AppCard({ ...props }: CardProp ) {
   );
 }
 
+export default AppCard;

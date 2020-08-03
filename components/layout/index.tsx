@@ -9,7 +9,8 @@ import Switch from '@material-ui/core/Switch';
 import Container from '@material-ui/core/Container';
 import { userTheme, useStyles } from './styles';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+const Layout: React.FC = props => {
+  const { children } = props;
   // Remove the server-side injected CSS.
   React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
@@ -53,3 +54,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </ThemeProvider>
   )
 }
+
+export default Layout;

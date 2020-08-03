@@ -6,6 +6,6 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
-    height: '100%'
+    maxHeight: '100%'
   }
 }));
