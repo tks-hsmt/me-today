@@ -19,6 +19,13 @@ export const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex'
   },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    })
+  },
   toolbar: {
     paddingRight: 24 // keep right padding when drawer closed
   },
@@ -28,13 +35,6 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end',
     padding: '0 8px',
     ...theme.mixins.toolbar
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -83,8 +83,5 @@ export const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(2),
     height: '100%',
     overflow: 'hidden'
-  },
-  fixedHeight: {
-    height: 240
   }
 }));

@@ -30,3 +30,8 @@ export const trelloTaskSelector = createSelector(
   selectedIdSelector,
   (entities, id) => (id ? entities[id] || null : null)
 );
+
+export const isAuthorizedSelector = createSelector(
+  featureStateSelector,
+  state => state.isAuthorized
+);

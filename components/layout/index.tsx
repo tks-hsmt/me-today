@@ -39,7 +39,7 @@ const Layout: React.FC = props => {
         </Head>
         <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
-            <Typography>Header</Typography>
+            <Typography>Me Today</Typography>
             <Switch checked={darkState} onChange={handleThemeChange}></Switch>
           </Toolbar>
         </AppBar>

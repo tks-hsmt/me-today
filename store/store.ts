@@ -26,7 +26,7 @@ const middleware = getDefaultMiddleware({
 export const store = configureStore({
   reducer,
   middleware,
-  devTools: true
+  devTools: process.env.NODE_ENV !== 'production'
 });
 
 /**

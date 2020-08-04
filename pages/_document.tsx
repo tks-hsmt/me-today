@@ -4,8 +4,12 @@ import { ServerStyleSheets } from '@material-ui/core/styles';
 import { userTheme } from '../components/layout/styles';
 
 export default class AppDocument extends Document {
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx);
+    return { ...initialProps };
+  }
   render() {
-    const theme = userTheme(false);
+    const theme = userTheme(true);
     return (
       <Html lang='en'>
         <Head>

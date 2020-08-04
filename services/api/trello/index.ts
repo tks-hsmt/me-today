@@ -1,33 +1,60 @@
-import { TrelloTask } from "../../../models";
+import { TrelloTask, Me, Card } from "../../../models";
+import axios from 'axios';
 
 // TODO 仮実装
 
-const tasks: TrelloTask[] = [
-  { id: '1', title: 'task1' },
-  { id: '2', title: 'task2' },
-  { id: '3', title: 'task3' },
-  { id: '4', title: 'task4' },
-  { id: '5', title: 'task5' },
-  { id: '6', title: 'task6' },
-  { id: '7', title: 'task7' },
-  { id: '8', title: 'task8' },
-  { id: '9', title: 'task9' },
-  { id: '10', title: 'task10' },
-  { id: '11', title: 'task11' },
-  { id: '12', title: 'task12' },
-  { id: '13', title: 'task13' },
-  { id: '14', title: 'task14' },
-  { id: '15', title: 'task15' },
-  { id: '16', title: 'task16' },
-];
-
 class TrelloService {
 
+  private readonly baseUrl: string;
+
   async fetchAll(): Promise<TrelloTask[]> {
-    return tasks;
+    const me = await this.fetchMe();
+    const url = `${this.baseUrl}/members/${me.id}/cards/open`;
+    const result = await axios.get<Card[]>(url, {
+      params: { key: this.key, token: this.token }
+    });
+    return result.data;
   }
 
-  constructor(private readonly baseUrl: string) { }
+  async fetchMe(): Promise<Me> {
+    const url = `${this.baseUrl}/members/me`;
+    const result = await axios.get<Me>(url, {
+      params: { key: this.key, token: this.token }
+    });
+    return result.data;
+  }
+
+  set key(key: string) {
+    if (!key) {
+      localStorage.removeItem('trello.api.key');
+      return;
+    }
+    localStorage.setItem('trello.api.key', key);
+  }
+
+  get key(): string {
+    return localStorage.getItem('trello.api.key');
+  }
+
+  set token(token: string) {
+    if (!token) {
+      localStorage.removeItem('trello.api.token');
+      return;
+    }
+    localStorage.setItem('trello.api.token', token);
+  }
+
+  get token(): string {
+    return localStorage.getItem('trello.api.token');
+  }
+
+  get isAuthorized(): boolean {
+    return (this.key && this.token) ? true : false;
+  }
+
+  constructor(domain: string, version: string) {
+    this.baseUrl = `${domain}/${version}`;
+  }
 }
 
-export const trelloService = new TrelloService('');
+export const trelloService = new TrelloService('https://api.trello.com', '1');

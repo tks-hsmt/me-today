@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { initialState, adapter } from './state';
-import { fetchAllTasks } from './action';
+import { fetchAllTasks, authorized, unAuthorized, authorize } from './action';
 
 export const reducer = createReducer(initialState, builder =>
   builder
@@ -14,5 +14,14 @@ export const reducer = createReducer(initialState, builder =>
     })
     .addCase(fetchAllTasks.rejected, state => {
       return { ...state, isFetching: false };
+    })
+    .addCase(authorize, (state, action) => {
+      return { ...state, isAuthorized: action.payload };
+    })
+    .addCase(authorized, (state, action) => {
+      return { ...state, isAuthorized: action.payload };
+    })
+    .addCase(unAuthorized, state => {
+      return { ...state, isAuthorized: false };
     })
 );

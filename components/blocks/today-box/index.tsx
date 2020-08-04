@@ -18,7 +18,7 @@ const TodayBox: React.FC<Props> = props => {
       <Typography>Today Tasks</Typography>
       <AppPaper className={classes.appPaper}>
         {tasks.map(task => (
-          <AppCard className={classes.card} title={task.title} subTitle='Content sub' headerImage='me-today_icon.png'></AppCard>
+          <AppCard key={task.id} className={classes.card} title={task.title} subTitle='Content sub' headerImage='me-today_icon.png'></AppCard>
         ))}
       </AppPaper>
     </Box>

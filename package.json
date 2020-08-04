@@ -12,6 +12,7 @@
     "@material-ui/icons": "^4.9.1",
     "@reduxjs/toolkit": "^1.4.0",
     "@types/redux-logger": "^3.0.8",
+    "axios": "^0.19.2",
     "next": "9.5.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
